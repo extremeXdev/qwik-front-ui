@@ -1,0 +1,180 @@
+
+/*_____ QWIK LOGIN PAGE ______*/
+
+body {
+    min-width: 100vw;
+    min-height: 100vh;
+    align-content: center;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;  /* fold bar remove */
+  }
+  
+  .qwik-login-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+  }
+
+  .color-emphasies {
+    color: rgb(33 113 97);
+  }
+  
+  .qwik-login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .qwik-logo-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .qwik-logo-section img {
+    width: 13.3em;
+    height: auto;
+  }
+  
+  .qwik-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* gap: 1.1em; */
+    gap : 0.2rem;
+    padding: 20px;
+    border-radius: 3.1em;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(197, 197, 197, 0.8);
+    width: 25em;
+    height: 22em;
+  }
+  
+  .qwik-form h2 {
+    margin-bottom: 0.55em;
+    font-size: 30px;
+    font-weight: bold;
+  }
+  
+  .qwik-form p {
+    margin-bottom: 20px;
+    font-size: 18px;
+    color: #666;
+  }
+  
+  .qwik-form input {
+    width: 92%;
+    height: 1.2em;
+    padding: 10px;
+    padding-left: 14px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+  }
+  
+  .qwik-text-above p {
+    font-weight: bold;
+    margin-top: 0;
+    font-size: 1em;
+    color: rgb(42, 42, 42);
+  }
+
+  .qwik-text-above h2 {
+    font-size: 1.7rem;
+  }
+
+  .qwik-not-account-zone {
+    margin-top: 2em;
+  }
+
+  #forgot-pass {
+     color: rgb(42, 42, 42);
+     font-weight: bold;
+     font-size: 1em;
+  }
+
+  .qwik-form-zone h2 {
+    margin-top: 5em;
+  }
+  
+  .qwik-form button {
+    width: 100%;
+    height: 2.9em;
+    padding: 12px;
+    border: none;
+    background-color: rgb(33 113 97);
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+  }
+  
+  .qwik-form a b   {
+    color: rgb(255, 255, 255);
+    text-decoration: underline;
+  }
+  
+  .qwik-form input:active {
+    border: 2px solid darkorange;
+  }
+  
+  .qwik-form button, .qwik-form input { 
+    border-radius: 6px;
+  }
+  
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+  }
+  
+  .form-group label {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 15px;
+  
+    width: 100%;
+  }
+  
+  
+  .form-group input {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 18em;
+  }
+  
+  .qwik-form button:hover {
+    background-color: #27592a;
+  }
+  
+  .qwik-form a {
+    color: #4CAF50;
+    text-decoration: none;
+  }
+  
+  /* qwik form login - register */
+  .qwik-form a b:hover, .qwik-form-container a b:hover{
+    text-decoration: underline;
+    text-decoration-color: darkorange;
+  }
+
+  .qwik-form input:active {
+    border: 2px solid darkorange;
+  }
+  
+  .qwik-logo-lg {
+    width: 27em;
+    height: auto;
+  }
+  
+  /*_____ end here ______*/
+  
+  

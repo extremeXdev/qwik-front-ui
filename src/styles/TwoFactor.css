@@ -1,0 +1,177 @@
+
+  /* ************ */
+/* body {
+  min-width: 100vw;
+  min-height: 100vh;
+  align-content: center;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;  /* fold bar remove */
+/* } */
+   
+.qwik-2fa-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 16em;
+}
+
+.qwik-logo-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qwik-logo-section img {
+  width: 13.3em;
+  height: auto;
+}
+
+.qwik-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2em;
+  padding: 20px;
+  border-radius: 3.1em;
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+
+  width: 25em;
+  height: 22em;
+}
+
+.qwik-form h2 {
+  margin-bottom: 0.55em;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.qwik-form input {
+  width: 92%;
+  height: 1.2em;
+  padding: 5px;
+  padding-left: 14px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.qwik-text-above p {
+  font-weight: lighter;
+  font-size:large;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.qwik-text-above h2 {
+  font-weight: bold;
+  font-size: 1.3em;
+  margin-top: 0;
+}
+  
+
+.qwik-form button {
+  width: 50%;
+  height: 2.9em;
+  padding: 12px;
+  border: 1px solid rgb(85, 84, 84);
+  background-color: rgb(33 113 97);
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.qwik-form button, .qwik-form input { 
+  border-radius: 6px;
+}
+
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.form-group label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 15px;
+
+  width: 100%;
+}
+
+
+.form-group input {
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+width: 18em;
+}
+
+.qwik-form button:hover {
+background-color: #27592a;
+}
+
+.qwik-form input:active {
+border: 2px solid darkorange;
+}
+
+.qwik-logo-lg {
+width: 27em;
+height: auto;
+}
+
+/*_____ end here ______*/
+
+
+
+.qwik-code-field {
+  margin-bottom: 1rem;
+  align-items:first baseline;
+}
+
+.qwik-grouped-field  {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: 75%;
+}
+
+.qwik-code-field input {
+  width: 100%;
+  height: 3em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.qwik-code-field input {
+  border-color: rgb(33 113 97);
+  border-width: 1.5px;
+  border-radius: 7px;
+}
+
+.qwik-code-field input:focus {
+  outline: none;
+  border-top-color: darkorange;
+}
+
+
+/* -------- */
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  label {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+

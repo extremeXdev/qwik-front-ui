@@ -1,0 +1,54 @@
+{
+    "front": [
+      {
+        "path": "/",
+        "method": "GET",
+        "label;": "home"
+      },
+      {
+        "path": "/login",
+        "method": "GET",
+        "label": "login"
+      },
+      {
+        "path": "/register",
+        "method": "GET",
+        "label": "register"
+      },
+      {
+        "path": "/validate",
+        "method": "GET",
+        "label": "validate"
+      },
+      {
+        "path": "/register/infobase/*",
+        "method": "GET",
+        "label": "infobase"
+      },
+      {
+        "path": "/login/forgotpw",
+        "method": "GET",
+        "label": "forgotpw"
+      },
+      {
+        "path": "/login/restorepw",
+        "method": "GET",
+        "label": "forgotpw"
+      }
+    ],
+
+    "back": [
+
+      {
+        "path": "/api/users",
+        "method": "POST",
+        "description": "Get list of users"
+      },
+      {
+        "path": "/api/users/:id",
+        "method": "GET",
+        "description": "Get user by ID"
+      }
+    ]
+}
+

@@ -1,0 +1,9 @@
+.DS_Store
+.idea/
+.vscode/
+.vite/
+.env
+.*/
+node_modules/
+Thumbs.db
+draft

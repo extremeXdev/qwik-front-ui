@@ -1,0 +1,159 @@
+
+/*_____ QWIK REGISTER PAGE ______*/
+/* 
+body {
+  min-width: 100vw;
+  min-height: 100vh;
+  align-content: center;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;  /* fold bar remove */
+/*} */
+/* 
+.qwik-container-pageBack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: none;
+} */
+/* 
+.qwik-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0px;
+  height: 100vh;
+  width: 30em;
+  background-color: none;
+} */
+
+/************ adapted **********/ 
+
+.qwik-grouped-field .qwik-form-field {
+  max-width: 49%;
+}
+
+
+/**********************/
+
+.qwik-logo {
+  margin-bottom: 5px;
+  margin-top: 0px;
+}
+
+.qwik-logo img {
+  width: 200px;
+  height: auto;
+}
+
+.qwik-form-container {
+  background-color: rgba(195, 195, 195, 0.1);
+  padding: 2rem;
+  border-radius: 3.1em;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  width: 350px;
+  margin: 0px;
+  height: 34em;
+  border: 1px solid rgba(197, 197, 197, 0.8);
+}
+
+.qwik-text-above h1 {
+  margin-bottom: 1rem;
+  text-align: center;
+  /* font-size: 2rem; */    /* old-qwik */  
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.qwik-form-container p {
+  margin-bottom: 2rem;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.qwik-form-field {
+  margin-bottom: 1rem;
+  align-items:first baseline;
+}
+
+.qwik-grouped-field  {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.qwik-form-field label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  text-align: left;
+  padding-left: 8px;
+}
+
+.qwik-form-field input {
+  width: 100%;
+  height: 3em;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.qwik-form-field input {
+  border-color: rgb(33 113 97);
+  border-width: 1.5px;
+  border-radius: 7px;
+}
+
+.qwik-form-field input:focus {
+  outline: none;
+  border-top-color: darkorange;
+}
+
+/* qwik form login - register */
+.qwik-form a b:hover, .qwik-form-container a b:hover{
+  text-decoration: underline;
+  text-decoration-color: darkorange;
+}
+
+#country-code {
+  width: 75px;
+}
+
+.qwik-form-field button {
+  color: #fff;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 7px;
+  border-width: 2px;
+  border-color: #666;
+  height: 3em;
+  font-size: 0.9em;
+  font-weight: bold;
+  cursor: pointer;
+  /* transition: background-color 0.3s ease; */
+  width: 100%;
+}
+
+.qwik-form-field button:hover {
+  background-color: rgb(11, 137, 91);
+}
+
+.qwik-form-container a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.qwik-form-container a:hover {
+  text-decoration: underline;
+}
+
+.qwik-form-container a b:hover  {
+  text-decoration-color: darkorange;
+}
+
+/*_____ end here ______*/
+
