@@ -110,20 +110,12 @@ function BaseRouter() {
       element: (
         <>
          <Alert/>
-         <Register/>
+         {/*<Register/>*/}
+         <RegisterInfo/>
         </>
       ),
     },
-    {
-        path: "/validate",
-        element: (
-          <>
-           <Alert/>
-           <TwoFactor/>
-          </>
-        ),
-    },
-    {
+    /*{
       path: "register/infobase/*",
       element: (
         <>
@@ -131,7 +123,16 @@ function BaseRouter() {
          <RegisterInfo/>
         </>
       ),
-    },
+    }*/,
+    {
+      path: "/validate",
+      element: (
+        <>
+         <Alert/>
+         <TwoFactor/>
+        </>
+      ),
+  },
     {
       path: "login/forgotpw",
       element: (

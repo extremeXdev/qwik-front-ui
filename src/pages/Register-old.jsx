@@ -2,8 +2,6 @@
 import /*React,*/ { useState, useEffect , useTransition} from 'react';
 import QwikLogo from '../assets/qwik-logo-lg.png';
 
-import { useFormik } from 'formik';
-
 import * as utils from '../imports/lib';
 
 // import { getRoute, routesFront } from '../imports/routes';
@@ -11,8 +9,8 @@ import * as utils from '../imports/lib';
 
 import { BrowserRouter as Router, Route, Link, useNavigate } from 'react-router-dom';
 
-// import '../styles/Register.css';
-import '../styles/Register-inc.css';
+ import '../styles/Register.css';
+//import '../styles/Register-inc.css';
 
 const Register = () => {
 
@@ -26,6 +24,14 @@ const Register = () => {
    utils.qw_injectClass('qw-body', false, 'qwik-theme-bodyOrBackItemsCentered');
  //::::
  // - - - - QW - - - -
+
+ const [firstName, setFirstName] = useState('');
+ const [lastName, setLastName] = useState('');
+ const [email, setEmail] = useState('');
+ const [phoneCode, setPhoneCode] = useState('');
+ const [phoneNumber, setPhoneNumber] = useState('');
+ const [pass, setPass] = useState('');
+
 
  const navigate = useNavigate();
 
@@ -51,6 +57,29 @@ const Register = () => {
  }, []);
 */
 
+ const handleFirstNameChange = (event) => {
+   setFirstName(event.target.value);
+ };
+
+ const handleLastNameChange = (event) => {
+   setLastName(event.target.value);
+ };
+
+ const handleEmailChange = (event) => {
+   setEmail(event.target.value);
+ };
+
+ const handlePhoneCodeChange = (event) => {
+   setPhoneCode(event.target.value);
+ };
+
+ const handlePhoneNumberChange = (event) => {
+  setPhoneNumber(event.target.value);
+};
+
+ const handlePassChange = (event) => {
+   setPass(event.target.value);
+ };
 
  const handleSubmit = (event) => {
   event.preventDefault();
@@ -181,25 +210,6 @@ function stepProcess() {
    //::::
 }
 //::::: END VALIDATION FORM MANAGE
-
-const formik = useFormik({
-  initialValues: {
-
-    firstName: !utils.qw_isEmptyStringOrData(formData.firstName) ? formData.firstName : '',
-    lastName: !utils.qw_isEmptyStringOrData(formData.lastName) ? formData.lastName : '',
-    email: !utils.qw_isEmptyStringOrData(formData.email) ? formData.email : '',
-    countryCode: !utils.qw_isEmptyStringOrData(formData.countryCode) ? formData.countryCode : '',
-    phoneNumber: !utils.qw_isEmptyStringOrData(formData.phoneNumber) ? formData.phoneNumber : '',
-    password: !utils.qw_isEmptyStringOrData(formData.password) ? formData.password : '',
-  },
-  validate,
-  onSubmit: values => {
-    updateFormData(values, 3);
-    updateFormData(values, 3);
-    // alert(utils.qw_dataToJsonStringFormat(formData));
-    onClick_Promise(true, true);  // onClick_Promise(true, true);
-  },
-});
 
   return (
     <div className="qwik-container-pageBack">

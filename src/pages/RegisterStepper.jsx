@@ -277,9 +277,9 @@ const handleFormStepperBtn = async (isFinal=false, displayExtraExitPage=false) =
              }
          >
                 {/* Wrongness, style error and vite display issues */}
-                {/* <div className="stepperSubDiv">
-                    <Register/>
-                </div> */}
+            <div className="stepperSubDiv">
+                <Register/>
+            </div>
             <div className="stepperSubDiv">
                 <RegisterInfoBase btnID={btnID} displayLogo={true} displayStep={true} stepN={1} stepZ={3} formData={form1Data} updateFormData={updateFormData}  onClick_Promise={handleFormStepperBtn}/>
             </div>
