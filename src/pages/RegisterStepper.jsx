@@ -22,7 +22,7 @@ import RegisterInfoRep from '../pages-step/RegisterInfoRep.jsx';
 import RegisterInfoFin from '../pages-step/RegisterInfoFin.jsx';
 import { FormikConsumer } from 'formik';
 import RegisterInfoFinal from '../pages-step/RegisterInfoFinal.jsx';
-
+import Register from './Register';
 
 import QwikLogoImg from '../assets/qwik-logo-lg.png';
 
@@ -36,7 +36,7 @@ import QwikLogoImg_short from '../assets/qwik-logo.png';
     // const RegisterInfoFin  = lazy(() => utils.delayForPromise(import('../pages-step/RegisterInfoFin.jsx')));
     // const NotFound         = lazy(() => utils.delayForPromise(import('../pages/NotFound.jsx')));
     // // ::::
-    const Register  = lazy(() => utils.delayForPromise(import('./Register')));
+    //const Register  = lazy(() => utils.delayForPromise(import('./Register')));
 
 function RegisterStepper() {
   //const [count, setCount] = useState(0)
@@ -46,10 +46,11 @@ function RegisterStepper() {
   const [form1Data, setForm1Data] = useState({});
   const [form2Data, setForm2Data] = useState({});
   const [form3Data, setForm3Data] = useState({});
+  const [form4Data, setForm4Data] = useState({});
 
   const [defaultStep, setDefaultStep] = React.useState(1);
   const [activeStep, setActiveStep] = React.useState(defaultStep);
-  const [stepFinal, setStepFinal] = React.useState(3);
+  const [stepFinal, setStepFinal] = React.useState(4);
 
   const btnID = 'reg-default-submit';
 
@@ -80,7 +81,8 @@ useEffect(() => {
       updateFormData(form1Data, 1);
       updateFormData(form2Data, 2);
       updateFormData(form3Data, 3);
-  }, [form1Data, form2Data, form3Data]);
+      updateFormData(form4Data, 4);
+  }, [form1Data, form2Data, form3Data, form4Data]);
 
 
 // // Change Step view Effect
@@ -94,16 +96,18 @@ useEffect(() => {
 //   };
   
   const updateFormData = (data, form_nb=1) => {
-    
+
     if(form_nb===1)
         setForm1Data(data);
     else if(form_nb===2)
         setForm2Data(data);
     else if(form_nb===3)
         setForm3Data(data);
+    else if(form_nb===4)
+        setForm4Data(data);
     
     //:::: join them in a single
-       setFormData( utils.qw_dataMergerInSingleObject(form1Data, form2Data, form3Data));
+       setFormData( utils.qw_dataMergerInSingleObject(form1Data, form2Data, form3Data, form4Data));
     //::::
   };
 
@@ -185,9 +189,9 @@ async function finalProcess() {
   const establ_date = utils.qw_formatDate(formData.establishmentDate, "yyyy-MM-dd");
 
     const data_toSend = {
-      firstName: regSavedData?.firstName,
-      lastName: regSavedData?.lastName,
-      phone: regSavedData?.phone,
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      phone: formData.countryCode + formData.phoneNumber,
 
       legalBusinessName: formData.legalName,
       businessName: formData.commercialName,
@@ -203,7 +207,7 @@ async function finalProcess() {
       legalRepresentativePhone: formData.reprPhoneNumber,
       legalRepresentativeEmail: formData.reprEmail,
       
-      email: regSavedData?.email,                       // "stanis@gmail.com"
+      email: formData.email,                       // "stanis@gmail.com"
       
       annualTurnover: formData.anualTurnover,
       bankName: formData.bankName,
@@ -211,8 +215,8 @@ async function finalProcess() {
       iban: formData.bankIban,
       bic: formData.bankBic,
       
-      password: regSavedData?.password,                // "admin12345"
-      confirmPassword: regSavedData?.confirmPassword,  // "admin12345"
+      password: formData.password,                // "admin12345"
+      confirmPassword: formData.password,         // "admin12345"
     };
     // utils.qw_alertWarning("OOPs!");
     
@@ -278,20 +282,19 @@ const handleFormStepperBtn = async (isFinal=false, displayExtraExitPage=false) =
          >
                 {/* Wrongness, style error and vite display issues */}
             <div className="stepperSubDiv">
-                <Register/>
+                <Register btnID={btnID} displayLogo={true} stepN={1} stepZ={stepFinal} formData={form1Data} updateFormData={updateFormData}  onClick_Promise={handleFormStepperBtn}/>
             </div>
             <div className="stepperSubDiv">
-                <RegisterInfoBase btnID={btnID} displayLogo={true} displayStep={true} stepN={1} stepZ={3} formData={form1Data} updateFormData={updateFormData}  onClick_Promise={handleFormStepperBtn}/>
+                <RegisterInfoBase btnID={btnID} displayLogo={true} displayStep={true} stepN={2} stepZ={stepFinal} formData={form2Data} updateFormData={updateFormData}  onClick_Promise={handleFormStepperBtn}/>
             </div>
             <div className="stepperSubDiv">
-                <RegisterInfoRep btnID={btnID} displayLogo={true} displayStep={true} stepN={2} stepZ={3} formData={form2Data} updateFormData={updateFormData} onClick_Promise={handleFormStepperBtn}/>
+                <RegisterInfoRep btnID={btnID} displayLogo={true} displayStep={true} stepN={3} stepZ={stepFinal} formData={form3Data} updateFormData={updateFormData} onClick_Promise={handleFormStepperBtn}/>
             </div>
             <div className="stepperSubDiv">
-                <RegisterInfoFin btnID={btnID} displayLogo={true} displayStep={true} stepN={3} stepZ={3} formData={form3Data} updateFormData={updateFormData}  onClick_Promise={handleFormStepperBtn}/>
+                <RegisterInfoFin btnID={btnID} displayLogo={true} displayStep={true} stepN={4} stepZ={stepFinal} formData={form4Data} updateFormData={updateFormData}  onClick_Promise={handleFormStepperBtn}/>
             </div>
-
             <div className="stepperSubDiv">
-                <RegisterInfoFinal btnID={btnID} displayLogo={true} displayStep={true} stepN={3} stepZ={3} formData={form3Data} updateFormData={updateFormData}  onClick_Promise={handleFormStepperBtn}/>
+                <RegisterInfoFinal btnID={btnID} displayLogo={true} displayStep={true} stepN={4} stepZ={stepFinal} formData={form4Data} updateFormData={updateFormData}  onClick_Promise={handleFormStepperBtn}/>
             </div>
         </Stepper>
       </>

@@ -2,6 +2,7 @@
 import /*React,*/ { useState, useEffect , useTransition} from 'react';
 import QwikLogo from '../assets/qwik-logo-lg.png';
 
+import RegisterInfoBtn from '../components/RegisterInfoBtn';
 import { useFormik } from 'formik';
 
 import * as utils from '../imports/lib';
@@ -14,7 +15,7 @@ import { BrowserRouter as Router, Route, Link, useNavigate } from 'react-router-
 // import '../styles/Register.css';
 import '../styles/Register-inc.css';
 
-const Register = () => {
+const Register = ({ /*displayLogo=false, displayStep=false,*/ stepN=1, stepZ=1, btnID='', formData={}, updateFormData, onClick_Promise}) => {
 
  // - - - - QW auto styling css- - - -
 
@@ -52,34 +53,28 @@ const Register = () => {
 */
 
 
- const handleSubmit = (event) => {
-  event.preventDefault();
-  // Handle login logic here, ...
-  stepProcess();
-};
-
 //:::: VALIDATION FORM MANAGE
-const validate = (values) => {
+const validate_all = (values) => {
   const errors = {};
 
-  if (!values.name) {
-    errors.name = "Name is required!";
+  if (!values.firstName) {
+    errors.firstName = "Name is required!";
   }
-  else if ( !utils.qw_validateName(values.name) ) {
-    errors.name = "Invalide Name or so short";
+  else if ( !utils.qw_validateName(values.firstName) ) {
+    errors.firstName = "Invalid name or too short";
   }
 
   if ( !values.lastName ) {
-    errors.lastName = "Last Name is required!";
+    errors.lastName = "Last name is required!";
   }
   else if ( !utils.qw_validateName(values.lastName) ) {
-    errors.lastName = "Invalide Last Name or so short";
+    errors.lastName = "Invalid Last Name or too short";
   }
 
   if (!values.email) {
-    errors.email = "Email is Required";
+    errors.email = "Email is required";
   } else if ( !utils.qw_validateEmailFormat(values.email)) {
-    errors.email = "Invalid emaill address";
+    errors.email = "Invalid email address";
   }
 
   if (!values.phoneCode) {
@@ -96,8 +91,8 @@ const validate = (values) => {
     errors.phoneNumber = "Phone Number incorrect";
   }
 
-  if (!values.pass) {
-    errors.pass = "Password is Required";
+  if (!values.password) {
+    errors.password = "Password is Required";
   }
 
   // if (!values.checkbox) {
@@ -113,6 +108,88 @@ const validate = (values) => {
   return errors;
 };
 
+
+const validate = (values) => {
+  const errors = {};
+
+  if (!values.firstName) {
+    errors.firstName = "required";
+  }
+  else if ( !utils.qw_validateName(values.firstName) ) {
+    errors.firstName = "too short";
+  }
+
+  if ( !values.lastName ) {
+    errors.lastName = "required";
+  }
+  else if ( !utils.qw_validateName(values.lastName) ) {
+    errors.lastName = "too short";
+  }
+
+  if (!values.email) {
+    errors.email = "required";
+  } else if ( !utils.qw_validateEmailFormat(values.email)) {
+    errors.email = "email invalid";
+  }
+
+  if (!values.phoneCode) {
+    errors.phoneCode = "code required";
+  }
+  else if ( !utils.qw_validatePhoneCode(values.phoneCode) ) {
+    errors.phoneCode = "code incorrect";
+  }
+
+  if (!values.phoneNumber) {
+    errors.phoneNumber = "number required";
+  }
+  else if ( !utils.qw_validatePhoneNumber(values.phoneNumber) ) {
+    errors.phoneNumber = "number incorrect";
+  }
+
+  if (!values.password) {
+    errors.password = "required";
+  }
+
+  // if (!values.checkbox) {
+  //   errors.checkbox = "You must accept our terms";
+  // }
+  // if (!values.select) {
+  //   errors.select = "Select is required";
+  // }
+  // if (!values.radio) {
+  //   errors.radio = "You must accept our terms";
+  // }
+
+  return errors;
+};
+
+
+
+const validate_ = (values) => {
+  const errors = {};
+
+  if (!values.firstName) {
+    errors.firstName = "required";
+  }
+  if ( !values.lastName ) {
+    errors.lastName = "required";
+  }
+  if (!values.email) {
+    errors.email = "required";
+  }
+  if (!values.phoneCode) {
+    errors.phoneCode = "required";
+  }
+  if (!values.phoneNumber) {
+    errors.phoneNumber = "required";
+  }
+  if (!values.password) {
+    errors.password = "required";
+  }
+
+  return errors;
+};
+
 function validatedSignupForm(fieldsData = {}) {
 
   //:::: validate call
@@ -123,7 +200,7 @@ function validatedSignupForm(fieldsData = {}) {
     return utils.qw_validatedForm(wrongs);
   //::::
 }
-
+/* 
 function processShouldFinalizeSignup(_data = {}) {
 
   //:::: save data in cash
@@ -142,45 +219,18 @@ function processShouldFinalizeSignup(_data = {}) {
       { utils.qw_alertWarning("Something seem wrong, try again or comeback later"); }
   //::::
 }
+ */
 
-
-function stepProcess() {
-
-  const data = {
-    name: firstName,
-    lastName: lastName,
-    email: email,
-    phoneCode: phoneCode,
-    phoneNumber: phoneNumber,
-    pass: pass,
-  };
-
-  const data_toSend = {
-    firstName: data.name,
-    lastName: data.lastName,
-    email: data.email,
-    // phoneCode: data.phoneCode,
-    phone: data?.phoneCode + data?.phoneNumber,
-    password: data.pass,
-    confirmPassword: data.pass,
-  };
-
-  if( !validatedSignupForm(data) )
-    { return; }
-
-  // utils.qw_alertWarning("OOPs!");
-
-  const emailStepOK =  utils.qw_checkEmailAvailable(email);
+function stepProcess(data) {
+ 
+    if( !validatedSignupForm(data) )
+      { return; }
   
-   if(!emailStepOK)
-     { utils.qw_alertWarning("Email already Exist.");
-        return; }
-
-   //:::: continue with right data
-     processShouldFinalizeSignup(data_toSend);
-   //::::
+     //:::: continue with right data
+       onClick_Promise();
+     //::::
 }
-//::::: END VALIDATION FORM MANAGE
+//:::: END VALIDATION FORM MANAGE
 
 const formik = useFormik({
   initialValues: {
@@ -188,18 +238,24 @@ const formik = useFormik({
     firstName: !utils.qw_isEmptyStringOrData(formData.firstName) ? formData.firstName : '',
     lastName: !utils.qw_isEmptyStringOrData(formData.lastName) ? formData.lastName : '',
     email: !utils.qw_isEmptyStringOrData(formData.email) ? formData.email : '',
-    countryCode: !utils.qw_isEmptyStringOrData(formData.countryCode) ? formData.countryCode : '',
+    phoneCode: !utils.qw_isEmptyStringOrData(formData.phoneCode) ? formData.phoneCode : '',
     phoneNumber: !utils.qw_isEmptyStringOrData(formData.phoneNumber) ? formData.phoneNumber : '',
     password: !utils.qw_isEmptyStringOrData(formData.password) ? formData.password : '',
   },
   validate,
   onSubmit: values => {
-    updateFormData(values, 3);
-    updateFormData(values, 3);
-    // alert(utils.qw_dataToJsonStringFormat(formData));
-    onClick_Promise(true, true);  // onClick_Promise(true, true);
+    
+    const data = values;
+
+    updateFormData(data, 1);
+
+   //:::: continue with right data
+     stepProcess(data);
+   //::::
   },
 });
+
+let err_phone = '';
 
   return (
     <div className="qwik-container-pageBack">
@@ -214,57 +270,99 @@ const formik = useFormik({
             <p>Tell us about yourself</p>
           </div>
 
-          <form onSubmit={ (e) => handleSubmit(e)}>
+          <form /*onSubmit={(e) => handleSubmit(e)}*/ onSubmit={formik.handleSubmit} >
             <div className="qwik-grouped-field">
               <div className="qwik-form-field">
-                <label htmlFor="firstName">First Name:</label>
-                <input type="text" id="firstName" name="firstName" placeholder='Coen'
-                value={firstName}
-                onChange={(e) => handleFirstNameChange(e)}
-               required/>
+                 <label htmlFor="firstName">First Name:&nbsp; {/* &nbsp; */}
+                    {formik.touched.firstName && formik.errors.firstName ?
+                      (<span className="color-emphasize-red">{formik.errors.firstName}</span>) : null}
+                 </label>
+                  <input type="text" id="firstName" name="firstName" placeholder='Coen'
+                    required
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.firstName}
+                  />
               </div>
               <div className="qwik-form-field">
-                <label htmlFor="lastName">Last Name:</label>
+                <label htmlFor="lastName">Last Name:&nbsp;
+                  {formik.touched.lastName && formik.errors.lastName ?
+                     (<span className="color-emphasize-red">{formik.errors.lastName}</span>) : null}
+                </label>
                 <input type="text" id="lastName" name="lastName" placeholder='Sandra'
-                value={lastName}
-                onChange={(e) => handleLastNameChange(e)}
-               required/>
+                  required
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.lastName}
+                />
               </div>
             </div>
 
             <div className="qwik-form-field">
-              <label htmlFor="email">Email:</label>
+              <label htmlFor="email">Email:&ensp;
+                  {formik.touched.email && formik.errors.email ?
+                     (<span className="color-emphasize-red">{formik.errors.email}</span>) : null}
+              </label>
               <input type="email" id="email" name="email" placeholder="stephia@foe.com"
-              value={email}
-              onChange={(e) => handleEmailChange(e)}
-              required/>
+                required
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.email}
+              />
             </div>
 
             <div className="qwik-form-field">
-              <label htmlFor="phoneNumber">Phone Number:</label>
+              <label htmlFor="phoneNumber">Phone Number:&ensp;
+
+                  { formik.touched.phoneCode && formik.errors.phoneCode && formik.touched.phoneNumber && formik.errors.phoneNumber ? 
+                      (<span className="color-emphasize-red">{formik.errors.phoneCode}</span>) :
+                        formik.touched.phoneCode && formik.errors.phoneCode ?
+                          (<span className="color-emphasize-red">{formik.errors.phoneCode}</span>) :
+                            formik.touched.phoneNumber && formik.errors.phoneNumber ?
+                              (<span className="color-emphasize-red">{formik.errors.phoneNumber}</span>) : err_phone=''
+                  }
+
+                  {/* 
+                  {formik.touched.phoneCode && formik.errors.phoneCode ?
+                     (<span className="color-emphasize-red">{formik.errors.phoneCode}</span>) : null}
+
+                  {formik.touched.phoneNumber && formik.errors.phoneNumber ?
+                     (<span className="color-emphasize-red">{formik.errors.phoneNumber}</span>) : null}
+                  */}
+                  
+              </label>
               <div className="qwik-grouped-field">
-                <input type="text" id="country-code" name="countryCode" placeholder='+33'
-                value={phoneCode}
-                onChange={(e) => handlePhoneCodeChange(e)}
-                required/>
+                <input type="text" id="country-code" name="phoneCode" placeholder='+33'
+                  required
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.phoneCode}
+                />
 
                 <input type="tel" id="phoneNumber" name="phoneNumber"
-                value={phoneNumber}
-                onChange={(e) => handlePhoneNumberChange(e)}
-                required/>
+                  required
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.phoneNumber}
+                />
               </div>
             </div>
             
             <div className="qwik-form-field">
-              <label htmlFor="password">Create your password:</label>
+              <label htmlFor="password"> Create your password:&ensp;
+                  {formik.touched.password && formik.errors.password ?
+                     (<span className="color-emphasize-red">{formik.errors.password}</span>) : null }
+              </label>
               <input type="password" id="password" name="password"
-                value={pass}
-                onChange={(e) => handlePassChange(e)}
-                required/>
+                required
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.password}
+              />
             </div>
 
             <div className="qwik-form-field">
-              <button className='qwik-theme-color-bk-dgreen' /*onClick={(e) => stepProcess()}*/ id="reg-submit" type="submit">CONTINUE</button>
+              <RegisterInfoBtn id={btnID} stepN={stepN} stepZ={stepZ} /*onClick={(e) => stepProcess()}*/  />
             </div>
           </form>
           
