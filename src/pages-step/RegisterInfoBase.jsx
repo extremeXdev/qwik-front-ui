@@ -28,45 +28,6 @@ const RegisterInfoBase = ({displayLogo=false, displayStep=false, stepN=1, stepZ=
 
  // - - - - QW - - - -
 
-  // const [legalName, setLegalName] = useState('');
-  // const [commercialName, setCommercialName] = useState('');
-  // const [legalForm, setLegalForm] = useState('');
-  // const [registrationNumber, setRegistrationNumber] = useState('');
-  // const [establishmentDate, setEstablishmentDate] = useState('');
-  // const [headquartersAddress, setHeadquartersAddress] = useState('');
-  // const [vatNumber, setVatNumber] = useState('');
-
-
-  // const navigate = useNavigate();
-
-  // const handleLegalNameChange = (event) => {
-  //   setLegalName(event.target.value);
-  // };
-
-  // const handleCommercialNameChange = (event) => {
-  //   setCommercialName(event.target.value);
-  // };
-
-  // const handleLegalFormChange = (event) => {
-  //   setLegalForm(event.target.value);
-  // };
-
-  // const handleRegistrationNumberChange = (event) => {
-  //   setRegistrationNumber(event.target.value);
-  // };
-
-  // const handleEstablishmentDateChange = (event) => {
-  //   setEstablishmentDate(event.target.value);
-  // };
-
-  // const handleHeadquartersAddressChange = (event) => {
-  //   setHeadquartersAddress(event.target.value);
-  // };
-
-  // const handleVatNumberChange = (event) => {
-  //   setVatNumber(event.target.value);
-  // };
-
 
 //:::: VALIDATION FORM MANAGE
 const validate_extra = (values) => {
@@ -225,9 +186,6 @@ const formik = useFormik({
                 <div className="qwik-form-field">
                   <div className="qwik-grouped-field">
                     <input type="text" id="legalName" name="legalName"
-                      //value={!utils.qw_isEmptyStringOrData(formData.legalName)
-                      //        && utils.qw_isEmptyStringOrData(legalName) ? formData.legalName : legalName}
-                      //onChange={(e) => handleLegalNameChange(e)}
                       placeholder='Hello Enterprise Ltd.'
                       required
                       onChange={formik.handleChange}
@@ -266,14 +224,11 @@ const formik = useFormik({
                 <div className="qwik-form-field">
                   <div className="qwik-grouped-field">
                     <input type="text" id="legalForm" name="legalForm"
-                    // value={!utils.qw_isEmptyStringOrData(formData.legalForm)
-                    //         && utils.qw_isEmptyStringOrData(legalForm) ? formData.legalForm : legalForm}
-                    // onChange={(e) => handleLegalFormChange(e)}
-                    placeholder='Private Limited Company (Ltd)'
-                    required
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.legalForm}
+                     placeholder='Private Limited Company (Ltd)'
+                     required
+                     onChange={formik.handleChange}
+                     onBlur={formik.handleBlur}
+                     value={formik.values.legalForm}
                     />
                     {formik.touched.legalForm && formik.errors.legalForm ?
                         (<div className="color-emphasize-red">{formik.errors.legalForm}</div>) : null}
@@ -288,16 +243,13 @@ const formik = useFormik({
                 <div className="qwik-form-field">
                   <div className="qwik-grouped-field">
                     <input type="text" id="registrationNumber" name="registrationNumber"
-                    // value={!utils.qw_isEmptyStringOrData(formData.registrationNumber)
-                    //         && utils.qw_isEmptyStringOrData(registrationNumber) ? formData.registrationNumber : registrationNumber}
-                    // onChange={(e) => handleRegistrationNumberChange(e)}
-                    required
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.registrationNumber}
+                     required
+                     onChange={formik.handleChange}
+                     onBlur={formik.handleBlur}
+                     value={formik.values.registrationNumber}
                     />
-                    {formik.touched.registrationNumber && formik.errors.registrationNumber ?
-                            (<div className="color-emphasize-red">{formik.errors.registrationNumber}</div>) : null}
+                     {formik.touched.registrationNumber && formik.errors.registrationNumber ?
+                         (<div className="color-emphasize-red">{formik.errors.registrationNumber}</div>) : null}
                   </div>
                 </div>
               </div>
@@ -309,13 +261,10 @@ const formik = useFormik({
                 <div className="qwik-form-field">
                   <div className="qwik-grouped-field">
                     <input type="date" id="establishmentDate" name="establishmentDate"
-                    // value={!utils.qw_isEmptyStringOrData(formData.establishmentDate)
-                    //         && utils.qw_isEmptyStringOrData(establishmentDate) ? formData.establishmentDate : establishmentDate}
-                    // onChange={(e) => handleEstablishmentDateChange(e)}
-                    required
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.establishmentDate}
+                     required
+                     onChange={formik.handleChange}
+                     onBlur={formik.handleBlur}
+                     value={formik.values.establishmentDate}
                     />
                     {formik.touched.establishmentDate && formik.errors.establishmentDate ?
                           (<div className="color-emphasize-red">{formik.errors.establishmentDate}</div>) : null}
@@ -330,14 +279,11 @@ const formik = useFormik({
                 <div className="qwik-form-field">
                   <div className="qwik-grouped-field">
                     <input type="text" id="headquartersAddress" name="headquartersAddress"
-                    // value={!utils.qw_isEmptyStringOrData(formData.headquartersAddress)
-                    //          && utils.qw_isEmptyStringOrData(headquartersAddress) ? formData.headquartersAddress : headquartersAddress}
-                    // onChange={(e) => handleHeadquartersAddressChange(e)}
-                    placeholder='Nice Street 4, Villebreak, HolyCountry'
-                    required
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.headquartersAddress}
+                     placeholder='Nice Street 4, Villebreak, HolyCountry'
+                     required
+                     onChange={formik.handleChange}
+                     onBlur={formik.handleBlur}
+                     value={formik.values.headquartersAddress}
                     />
                     {formik.touched.headquartersAddress && formik.errors.headquartersAddress ?
                           (<div className="color-emphasize-red">{formik.errors.headquartersAddress}</div>) : null}
@@ -351,17 +297,14 @@ const formik = useFormik({
                 </div>
                 <div className="qwik-form-field">
                   <div className="qwik-grouped-field">
-                    <input type="text" id="vatNumber" name="vatNumber" 
-                      // value={!utils.qw_isEmptyStringOrData(formData.vatNumber)
-                      //         && utils.qw_isEmptyStringOrData(vatNumber) ? formData.vatNumber : vatNumber}
-                      // onChange={(e) => handleVatNumberChange(e)}
+                    <input type="text" id="vatNumber" name="vatNumber"
                       required
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
                       value={formik.values.vatNumber}
                       />
                       {formik.touched.vatNumber && formik.errors.vatNumber ?
-                            (<div className="color-emphasize-red">{formik.errors.vatNumber}</div>) : null}
+                          (<div className="color-emphasize-red">{formik.errors.vatNumber}</div>) : null}
                     </div>
                 </div>
               </div>

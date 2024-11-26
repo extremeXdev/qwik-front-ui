@@ -28,7 +28,7 @@ const RegisterInfoFinal = ({displayLogo=false, displayStep=false, stepN=1, stepZ
 
         <div className="qwik-form-container">
           
-          { displayLogo ? <QwikLogo/> : null}
+          { displayLogo ? <QwikLogo/> : null }
 
           <div className="qwik-text-above">
             <h1 className="color-emphasize-red qwik-fontSize-emphasize-title"> Step <span className='qwik-reg-info-step-total'>Final</span> - You successfully registered</h1>

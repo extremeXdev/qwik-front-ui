@@ -145,7 +145,7 @@ function stepProcess(data) {
  
   if( !validatedSignupForm(data) )
     { return; }
-//alert('bingo');
+
    //:::: continue with right data
      onClick_Promise(true, true);   // last step is here
    //::::
@@ -175,8 +175,8 @@ function stepProcess(data) {
                       onBlur={formik.handleBlur}
                       value={formik.values.anualTurnover}
                     />
-                      {formik.touched.anualTurnover && formik.errors.anualTurnover ?
-                          (<div className="color-emphasize-red">{formik.errors.anualTurnover}</div>) : null}
+                     {formik.touched.anualTurnover && formik.errors.anualTurnover ?
+                        (<div className="color-emphasize-red">{formik.errors.anualTurnover}</div>) : null}
                   </div>
               </div>
             </div>
@@ -225,7 +225,7 @@ function stepProcess(data) {
               </div>
               <div className="qwik-form-field">
                  <div className="qwik-grouped-field">
-                     <input type="text" id="bankIban" name="bankIban"
+                    <input type="text" id="bankIban" name="bankIban"
                       //pattern='^[A-Z]{2}[0-9]{2}[A-Z0-9]{1,30}$'
                       placeholder='LU28 0019 4006 4475 0000'
                       required
@@ -245,14 +245,14 @@ function stepProcess(data) {
               </div>
               <div className="qwik-form-field">
                 <div className="qwik-grouped-field">
-                    <input type="text" id="bankBic" name="bankBic"
+                   <input type="text" id="bankBic" name="bankBic"
                     //pattern='^[A-Z]{4}[A-Z]{2}[A-Z0-9]{2}([A-Z0-9]{3})?$'
                     placeholder='HBUKGB4B'
                     required
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.bankBic}
-                    />
+                   />
                     {formik.touched.bankBic && formik.errors.bankBic ?
                         (<div className="color-emphasize-red">{formik.errors.bankBic}</div>) : null}
                 </div>
