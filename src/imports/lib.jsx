@@ -1126,13 +1126,21 @@ export function qw_validateBankBIC(_bic) {
 
 export function qw_validateBankIBAN(_iban) {
   let rsl = false;
-  const ibanPattern = /^[A-Z]{2}[0-9]{2}[A-Z0-9]{1,30}$/;
+  //alert(_iban);
+  _iban = qw_removeSpaces(_iban);
 
+  const ibanPattern = /^[A-Z]{2}[0-9]{2}[A-Z0-9]{1,30}$/;
+  
   if(ibanPattern.test(_iban))
     { rsl = true; }
   
   return rsl;
 }
+
+export function qw_removeSpaces(_str='') {
+  return _str.replaceAll(" ", "");
+}
+
 
 
 // function validateIBAN() {

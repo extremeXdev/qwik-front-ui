@@ -8,12 +8,12 @@ import * as React from "react";
 import { lazy, Suspense, startTransition } from 'react';
 
 import { useNavigate } from 'react-router-dom';
- import * as utils from '../imports/lib';
+import * as utils from '../imports/lib';
 
 import Stepper from "awesome-react-stepper";
- import '../styles/RegisterStepper.css';
+import '../styles/RegisterStepper.css';
 
- import * as restyle from '../styles/Register-restyle.css';
+import * as restyle from '../styles/Register-restyle.css';
 
 
 // import Register from "./Register";
@@ -52,7 +52,8 @@ function RegisterStepper() {
   const [activeStep, setActiveStep] = React.useState(defaultStep);
   const [stepFinal, setStepFinal] = React.useState(4);
 
-  const btnID = 'reg-default-submit';
+  // const btnID = 'reg-default-submit';
+  const btnID = 'reg-submit';
 
 
 //  // Get the stepper button element
@@ -181,6 +182,7 @@ async function processShouldFinalizeSignup(_data = {}) {
     
 async function finalProcess() {
    //utils.qw_alertSomething();
+
   //:::: save data in cash
   // const okaySaveInCache = utils.qw_processSaveDataInCash(_data);
     const regSavedData = utils.qw_securestorage_getUserRegisterInfo();   // secure storage
@@ -253,7 +255,6 @@ const handleFormStepperBtn = async (isFinal=false, displayExtraExitPage=false) =
  }
 
   return (    
-
       <>
         <Stepper
             strokeColor="#17253975"

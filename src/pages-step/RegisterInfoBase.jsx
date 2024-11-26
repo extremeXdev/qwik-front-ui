@@ -198,7 +198,7 @@ const formik = useFormik({
 
     const data = values;
 
-    updateFormData(data, 2);
+    updateFormData(data, stepN);
 
    //:::: continue with right data
      stepProcess(data);

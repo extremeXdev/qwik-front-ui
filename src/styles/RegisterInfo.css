@@ -41,13 +41,14 @@ body {
 }
 
 .qwik-form-container {
-  background-color: rgba(195, 195, 195, 3%);
+  background-color: rgba(195, 195, 195, 0.046);
   padding: 2rem;
   border-radius: 3.1em;
   /* box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); */
-  width: 39em;
+  padding-left: 3.5em;
+  width: 42em;
   margin: 0px;
-  height: 34em;
+  height: 34.8em;
   /* border: 1px solid rgba(197, 197, 197, 0.8); */
 }
 

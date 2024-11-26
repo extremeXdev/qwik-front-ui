@@ -65,22 +65,59 @@ const RegisterInfoRep = ({displayLogo=false, displayStep=false, stepN=1, stepZ=1
     // });
   };
 
-  function stepProcess() {
-     
-  }
+
+  const validate_extra = values => {
+    const errors = {};
+  
+    if (!values.reprLegalName) {
+      errors.reprLegalName = 'Name Required';
+    } else if (values.reprLegalName.length < 5) {
+      errors.reprLegalName = 'Name Too short';
+    }
+  
+    if (!values.reprLegalTitle) {
+      errors.reprLegalTitle = 'Legal Title required';
+    } else if (values.reprLegalTitle.length < 5) {
+      errors.reprLegalTitle = 'Legal Title too Short';
+    }
+  
+    if (!values.reprRegisteredOfficeAddress) {
+      errors.reprRegisteredOfficeAddress = 'Office Address required';
+    } else if (values.reprRegisteredOfficeAddress.length < 15) {
+      errors.reprRegisteredOfficeAddress = "Office Address too short";
+    }/*else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.reprEmail)) {
+      errors.reprEmail = 'Invalid reprEmail address';
+    }*/
+
+    if (!values.reprPhoneNumber) {
+      errors.reprPhoneNumber = "Phone Number required";
+    }
+    else if ( !utils.qw_validatePhoneNumber(values.reprPhoneNumber) ) {
+      errors.reprPhoneNumber = "Phone Number incorrect";
+    }
+
+    if (!values.reprEmail) {
+      errors.reprEmail = "Email required";
+    } else if ( !utils.qw_validateEmailFormat(values.reprEmail)) {
+      errors.reprEmail = "Email invalid";
+    }
+  
+    return errors;
+  };
+
 
   const validate = values => {
     const errors = {};
   
     if (!values.reprLegalName) {
       errors.reprLegalName = 'Required';
-    } else if (values.reprLegalName.length < 6) {
+    } else if (values.reprLegalName.length < 5) {
       errors.reprLegalName = 'Too short';
     }
   
     if (!values.reprLegalTitle) {
       errors.reprLegalTitle = 'Required';
-    } else if (values.reprLegalTitle.length < 6) {
+    } else if (values.reprLegalTitle.length < 5) {
       errors.reprLegalTitle = 'Too Short';
     }
   
@@ -118,11 +155,38 @@ const RegisterInfoRep = ({displayLogo=false, displayStep=false, stepN=1, stepZ=1
     },
     validate,
     onSubmit: values => {
-      updateFormData(values, 2);
-      // alert(utils.qw_dataToJsonStringFormat(formData));
-      onClick_Promise();
+     
+      const data = values;
+
+      updateFormData(data, stepN);
+  
+     //:::: continue with right data
+       stepProcess(data);
+     //::::
     },
   });
+
+
+function validatedSignupForm(fieldsData = {}) {
+
+  //:::: validate call
+  const wrongs = validate_extra(fieldsData);
+  //::::
+
+  //:::: check if there is any wrongness
+    return utils.qw_validatedForm(wrongs);
+  //::::
+}
+
+function stepProcess(data) {
+ 
+  if( !validatedSignupForm(data) )
+    { return; }
+
+   //:::: continue with right data
+     onClick_Promise();
+   //::::
+}
 
 
   return (
