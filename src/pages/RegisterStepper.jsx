@@ -147,7 +147,11 @@ async function processShouldFinalizeSignup(_data = {}) {
      // alert(utils.qw_dataToJsonStringFormat(_data));
 
       //:::: save data online
-       const [okaySaveOnline, rspData_orMsg] = await utils.qw_processSaveDataOnlineSignup(_data);
+      // const [okaySaveOnline, rspData_orMsg] = await utils.qw_processSaveDataOnlineSignup(_data);
+      //::::
+
+      //:::: ui purpose: TEST
+      const okaySaveOnline =  true;
       //::::
       
       //:::: move to next step
@@ -156,7 +160,7 @@ async function processShouldFinalizeSignup(_data = {}) {
             //alert(utils.qw_dataToJsonStringFormat(_data));
             
             //::::
-            // utils.qw_alertGood("final Step submit online...");
+              utils.qw_alertGood("final Step submit online...");
             //::::
 
              //:::: automaticaly login or create login session
@@ -164,7 +168,7 @@ async function processShouldFinalizeSignup(_data = {}) {
              //::::
 
              //:::: remove saved data in secure cash
-               utils.qw_securestorage_removeUserRegisterInfo();
+             // utils.qw_securestorage_removeUserRegisterInfo();
              //::::
 
              //:::: move
@@ -180,12 +184,12 @@ async function processShouldFinalizeSignup(_data = {}) {
       return [okaySaveOnline, rspData_orMsg];
 }
     
-async function finalProcess() {
-   //utils.qw_alertSomething();
+async function finalProcess() { 
+  //utils.qw_alertSomething();
 
   //:::: save data in cash
   // const okaySaveInCache = utils.qw_processSaveDataInCash(_data);
-    const regSavedData = utils.qw_securestorage_getUserRegisterInfo();   // secure storage
+  //  const regSavedData = utils.qw_securestorage_getUserRegisterInfo();   // secure storage
   //::::
  
   const establ_date = utils.qw_formatDate(formData.establishmentDate, "yyyy-MM-dd");
@@ -220,6 +224,7 @@ async function finalProcess() {
       password: formData.password,                // "admin12345"
       confirmPassword: formData.password,         // "admin12345"
     };
+    
     // utils.qw_alertWarning("OOPs!");
     
     //:::: continue with right data
