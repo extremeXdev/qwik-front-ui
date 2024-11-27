@@ -46,8 +46,7 @@ const RegisterInfoFinal = ({displayLogo=false, displayStep=false, stepN=1, stepZ
                <p>Already done? <a href="/login"> <b className='qwik-theme-color-dgreen'>Log In here</b></a></p>
             </div>
           </div>
-
-          
+                    
         </div>
       </div>
     </div>

@@ -160,7 +160,7 @@ async function processShouldFinalizeSignup(_data = {}) {
             //alert(utils.qw_dataToJsonStringFormat(_data));
             
             //::::
-              utils.qw_alertGood("final Step submit online...");
+            //  utils.qw_alertGood("final Step submit online...");
             //::::
 
              //:::: automaticaly login or create login session
@@ -240,16 +240,25 @@ const handleFormStepperBtn = async (isFinal=false, displayExtraExitPage=false) =
       {  
         if(!displayExtraExitPage)
           { submitFormFinalStep(); }
-
+        
            //utils.qw_injectStyle_imgSource("qwik-logo-id", QwikLogoImg_short);
            //utils.qw_injectStyle("qwik-logo-id", {max-width} )
            
-           const waiterNotif = utils.qw_alertPromise_loading("Please wait...", true);
-             const [rsp_done, rspData_orMsg] = await finalProcess();
-           utils.qw_alertPromise_loadingResult(rsp_done,
-                                               "Success",
-                                               rspData_orMsg,  /*"Something went wrong, try again or comeback later"*/
-                                               waiterNotif, true, true, true, 2000, 3000 );
+           
+           //:::: show loading
+            //  const waiterNotif = utils.qw_alertPromise_loading("Please wait...", true);
+            //  const [rsp_done, rspData_orMsg] = await finalProcess();
+           
+            //  utils.qw_alertPromise_loadingResult(rsp_done,
+            //                                    "Success",
+            //                                    rspData_orMsg,  /*"Something went wrong, try again or comeback later"*/
+            //                                    waiterNotif, true, true, true, 2000, 3000 );
+            //::::
+
+            //:::: UI Purpose only: TEST
+              const rsp_done =  true;
+              const waiterNotif = utils.qw_alertPromise_loading("Please wait...", true, true, true, 730);
+            //:::: 
 
               if(rsp_done && displayExtraExitPage)
                 { continueNextformStep();
