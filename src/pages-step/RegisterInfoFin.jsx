@@ -24,52 +24,7 @@ const RegisterInfoFin = ({displayLogo=false, displayStep=false, stepN=1, stepZ=1
 
  // - - - - QW - - - -
 
- /*
- const [anualTurnover, setAnualTurnover] = useState('');
- const [bankName, setBankName] = useState('');
- const [bankDetails, setBankDetails] = useState('');
- const [bankIban, setBankIban] = useState('');
- const [bankBic, setBankBic] = useState('');
-
-  const handleAnualTurnoverChange = (event) => {
-    setAnualTurnover(event.target.value);
-  };
-
-  const handleBankNameChange = (event) => {
-    setBankName(event.target.value);
-  };
-
-  const handleBankDetailsChange = (event) => {
-    setBankDetails(event.target.value);
-  };
-
-  const handleBankIbanChange = (event) => {
-    setBankIban(event.target.value);
-  };
-
-  const handleBankBicChange = (event) => {
-    setBankBic(event.target.value);
-  };
-
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission logic here
-    // console.log('Form submitted:', {
-    //   anualTurnover,
-    //   bankName,
-    //   bankDetails,
-    //   bankIban,
-    //   bankBic,
-    // });
-  };
-*/
-
-  function stepProcess() {
-     
-  }
-
-  const validate = values => {
+  const validate_extra = values => {
     const errors = {};
   
     if (!values.anualTurnover) {
@@ -80,8 +35,8 @@ const RegisterInfoFin = ({displayLogo=false, displayStep=false, stepN=1, stepZ=1
   
     if (!values.bankName) {
       errors.bankName = 'Required';
-    } else if (values.bankName.length < 6) {
-      errors.bankName = 'Must be 6 characters at least';
+    } else if (values.bankName.length < 4) {
+      errors.bankName = 'Must be 4 characters at least';
     }
   
     if (!values.bankDetails) {
@@ -107,6 +62,45 @@ const RegisterInfoFin = ({displayLogo=false, displayStep=false, stepN=1, stepZ=1
     return errors;
   };
 
+
+  const validate = values => {
+    const errors = {};
+  
+    if (!values.anualTurnover) {
+      errors.anualTurnover = 'required';
+    } else if (!utils.qw_validateMustBeGreaterThan(values.anualTurnover, 5000)) {
+      errors.anualTurnover = 'Number > 5000';
+    }
+  
+    if (!values.bankName) {
+      errors.bankName = 'required';
+    } else if (values.bankName.length < 4) {
+      errors.bankName = 'too short';
+    }
+  
+    if (!values.bankDetails) {  
+      errors.bankDetails = 'required';
+    } else if (values.bankDetails.length < 15) {
+      errors.bankDetails = "too short";
+    }
+
+    if (!values.bankIban) {
+      errors.bankIban = "required";
+    }
+    else if ( !utils.qw_validateBankIBAN(values.bankIban) ) {
+      errors.bankIban = "incorrect";
+    }
+
+    if (!values.bankBic) {
+      errors.bankBic = "required";
+    }
+    else if ( !utils.qw_validateBankBIC(values.bankBic) ) {
+      errors.bankBic = "incorrect";
+    }
+  
+    return errors;
+  };
+
   const formik = useFormik({
     initialValues: {
       anualTurnover: !utils.qw_isEmptyStringOrData(formData.anualTurnover) ? formData.anualTurnover : '',
@@ -117,12 +111,45 @@ const RegisterInfoFin = ({displayLogo=false, displayStep=false, stepN=1, stepZ=1
     },
     validate,
     onSubmit: values => {
-      updateFormData(values, 3);
-      updateFormData(values, 3);
-      // alert(utils.qw_dataToJsonStringFormat(formData));
-      onClick_Promise(true, true);  // onClick_Promise(true, true);
+
+      const data = values;
+
+      updateFormData(data, stepN);
+  
+     //:::: continue with right data
+       stepProcess(data);
+     //::::
     },
   });
+
+
+function validatedSignupForm(fieldsData = {}) {
+
+  //:::: validate call
+  const wrongs = validate_extra(fieldsData);
+  //::::
+
+  //:::: check if there is any wrongness
+    return utils.qw_validatedForm(wrongs);
+  //::::
+}
+
+
+const handleSubmit = (event) => {
+  event.preventDefault();
+  // Handle form submission here
+  stepProcess();
+};
+
+function stepProcess(data) {
+ 
+  if( !validatedSignupForm(data) )
+    { return; }
+
+   //:::: continue with right data
+     onClick_Promise(true, true);   // last step is here
+   //::::
+}
 
   return (
     <div className="qwik-container-pageBack">
@@ -142,16 +169,14 @@ const RegisterInfoFin = ({displayLogo=false, displayStep=false, stepN=1, stepZ=1
               <div className="qwik-form-field">
                   <div className="qwik-grouped-field">
                     <input type="text" id="anualTurnover" name="anualTurnover"
-                      //value={anualTurnover}
-                      //onChange={(e) => handleAnualTurnoverChange(e)}
                       placeholder='20 000 000'
                       required
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
                       value={formik.values.anualTurnover}
                     />
-                      {formik.touched.anualTurnover && formik.errors.anualTurnover ?
-                          (<div className="color-emphasize-red">{formik.errors.anualTurnover}</div>) : null}
+                     {formik.touched.anualTurnover && formik.errors.anualTurnover ?
+                        (<div className="color-emphasize-red">{formik.errors.anualTurnover}</div>) : null}
                   </div>
               </div>
             </div>
@@ -162,15 +187,13 @@ const RegisterInfoFin = ({displayLogo=false, displayStep=false, stepN=1, stepZ=1
               </div>
               <div className="qwik-form-field">
                   <div className="qwik-grouped-field">
-                      <input type="text" id="bankName" name="bankName"
-                      //value={bankName}
-                      //onChange={(e) => handleBankNameChange(e)}                
-                      placeholder='Hello Capital'
-                      required
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      value={formik.values.bankName}
-                    />
+                     <input type="text" id="bankName" name="bankName"             
+                       placeholder='Hello Capital'
+                       required
+                       onChange={formik.handleChange}
+                       onBlur={formik.handleBlur}
+                       value={formik.values.bankName}
+                     />
                       {formik.touched.bankName && formik.errors.bankName ?
                           (<div className="color-emphasize-red">{formik.errors.bankName}</div>) : null}
                  </div>
@@ -184,13 +207,11 @@ const RegisterInfoFin = ({displayLogo=false, displayStep=false, stepN=1, stepZ=1
               <div className="qwik-form-field">
                  <div className="qwik-grouped-field">
                     <input type="text" id="bankDetails" name="bankDetails"
-                    //value={bankDetails}
-                    //onChange={(e) => handleBankDetailsChange(e)}
-                    placeholder='Nice Street 4, Villebreak, HollyCountry'
-                    required
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.bankDetails}
+                     placeholder='Nice Street 4, Villebreak, HollyCountry'
+                     required
+                     onChange={formik.handleChange}
+                     onBlur={formik.handleBlur}
+                     value={formik.values.bankDetails}
                     />
                     {formik.touched.bankDetails && formik.errors.bankDetails ?
                         (<div className="color-emphasize-red">{formik.errors.bankDetails}</div>) : null}
@@ -204,9 +225,7 @@ const RegisterInfoFin = ({displayLogo=false, displayStep=false, stepN=1, stepZ=1
               </div>
               <div className="qwik-form-field">
                  <div className="qwik-grouped-field">
-                     <input type="text" id="bankIban" name="bankIban"
-                      //value={bankIban}
-                      //onChange={(e) => handleBankIbanChange(e)}
+                    <input type="text" id="bankIban" name="bankIban"
                       //pattern='^[A-Z]{2}[0-9]{2}[A-Z0-9]{1,30}$'
                       placeholder='LU28 0019 4006 4475 0000'
                       required
@@ -226,16 +245,14 @@ const RegisterInfoFin = ({displayLogo=false, displayStep=false, stepN=1, stepZ=1
               </div>
               <div className="qwik-form-field">
                 <div className="qwik-grouped-field">
-                    <input type="text" id="bankBic" name="bankBic"
-                    //value={bankBic}
-                    //onChange={(e) => handleBankBicChange(e)}
+                   <input type="text" id="bankBic" name="bankBic"
                     //pattern='^[A-Z]{4}[A-Z]{2}[A-Z0-9]{2}([A-Z0-9]{3})?$'
                     placeholder='HBUKGB4B'
                     required
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.bankBic}
-                    />
+                   />
                     {formik.touched.bankBic && formik.errors.bankBic ?
                         (<div className="color-emphasize-red">{formik.errors.bankBic}</div>) : null}
                 </div>

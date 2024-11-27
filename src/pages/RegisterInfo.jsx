@@ -9,6 +9,8 @@ import /*React,*/ { useState, useEffect } from 'react';
 import * as utils from '../imports/lib';
 import RegisterStepper from "./RegisterStepper.jsx";
 
+import Alert from "../components/Alert";
+
 const RegisterInfo = () => {
   /*
   const navigate = useNavigate();
@@ -34,6 +36,7 @@ const RegisterInfo = () => {
 
   return (
     <>
+      <Alert/>
       <RegisterStepper/>
     </>
   );

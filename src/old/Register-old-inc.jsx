@@ -200,7 +200,6 @@ function validatedSignupForm(fieldsData = {}) {
     return utils.qw_validatedForm(wrongs);
   //::::
 }
-
 /* 
 function processShouldFinalizeSignup(_data = {}) {
 
@@ -248,7 +247,7 @@ const formik = useFormik({
     
     const data = values;
 
-    updateFormData(data, stepN);
+    updateFormData(data, 1);
 
    //:::: continue with right data
      stepProcess(data);
@@ -265,15 +264,15 @@ let err_phone = '';
           <img src={QwikLogo} alt="Qwik Logo" />
         </div>
 
-        <div className="qwik-form-container-inc">
+        <div className="qwik-form-container">
           <div className="qwik-text-above">
             <h1 className="color-emphasize-red">Let's get going !!!</h1>
             <p>Tell us about yourself</p>
           </div>
 
           <form /*onSubmit={(e) => handleSubmit(e)}*/ onSubmit={formik.handleSubmit} >
-            <div className="qwik-grouped-field-inc">
-              <div className="qwik-form-field-inc">
+            <div className="qwik-grouped-field">
+              <div className="qwik-form-field">
                  <label htmlFor="firstName">First Name:&nbsp; {/* &nbsp; */}
                     {formik.touched.firstName && formik.errors.firstName ?
                       (<span className="color-emphasize-red">{formik.errors.firstName}</span>) : null}
@@ -285,7 +284,7 @@ let err_phone = '';
                     value={formik.values.firstName}
                   />
               </div>
-              <div className="qwik-form-field-inc">
+              <div className="qwik-form-field">
                 <label htmlFor="lastName">Last Name:&nbsp;
                   {formik.touched.lastName && formik.errors.lastName ?
                      (<span className="color-emphasize-red">{formik.errors.lastName}</span>) : null}
@@ -299,7 +298,7 @@ let err_phone = '';
               </div>
             </div>
 
-            <div className="qwik-form-field-inc">
+            <div className="qwik-form-field">
               <label htmlFor="email">Email:&ensp;
                   {formik.touched.email && formik.errors.email ?
                      (<span className="color-emphasize-red">{formik.errors.email}</span>) : null}
@@ -312,7 +311,7 @@ let err_phone = '';
               />
             </div>
 
-            <div className="qwik-form-field-inc">
+            <div className="qwik-form-field">
               <label htmlFor="phoneNumber">Phone Number:&ensp;
 
                   { formik.touched.phoneCode && formik.errors.phoneCode && formik.touched.phoneNumber && formik.errors.phoneNumber ? 
@@ -332,7 +331,7 @@ let err_phone = '';
                   */}
                   
               </label>
-              <div className="qwik-grouped-field-inc">
+              <div className="qwik-grouped-field">
                 <input type="text" id="country-code" name="phoneCode" placeholder='+33'
                   required
                   onChange={formik.handleChange}
@@ -349,7 +348,7 @@ let err_phone = '';
               </div>
             </div>
             
-            <div className="qwik-form-field-inc">
+            <div className="qwik-form-field">
               <label htmlFor="password"> Create your password:&ensp;
                   {formik.touched.password && formik.errors.password ?
                      (<span className="color-emphasize-red">{formik.errors.password}</span>) : null }
@@ -362,7 +361,7 @@ let err_phone = '';
               />
             </div>
 
-            <div className="qwik-form-field-inc">
+            <div className="qwik-form-field">
               <RegisterInfoBtn id={btnID} stepN={stepN} stepZ={stepZ} /*onClick={(e) => stepProcess()}*/  />
             </div>
           </form>

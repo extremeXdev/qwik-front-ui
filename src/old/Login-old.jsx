@@ -66,7 +66,7 @@ useEffect(() => {
  }
  //--- Email Page
  else // Load the default component here
-   { CurrentComponent = lazy(() => import('./LoginForm')); }
+   { CurrentComponent = lazy(() => import('../pages/LoginForm')); }
 
   //:::: Render the component
   utils.qw_renderInsideElement('qwik-form-login-step-zone', false, <CurrentComponent currentPageStep={currentPageStep} updateCurrentPageStep={updateCurrentPageStep} pageStepCST={PageStep}

@@ -14,7 +14,7 @@ const RegisterInfoBtn = ({stepN=1, stepZ=1, onClick_Promise, id=''}) => {
     
   return (
     <div className="qwik-form-field">
-        <button id={id} /*onClick={onClick_Promise}*/ className='qwik-theme-color-bk-dgreen' itemID="reg-submit" type="submit"> { btnText() } </button>
+        <button id={id} /*id="reg-submit"*/ /*onClick={onClick_Promise}*/ className='qwik-theme-color-bk-dgreen' type="submit"> { btnText() } </button>
     </div>
   );
 }; 

@@ -104,7 +104,7 @@ function BaseRouter() {
          <Login/>
         </>
       ),
-    },
+    },/*
     {
       path: "/register",
       element: (
@@ -115,15 +115,6 @@ function BaseRouter() {
       ),
     },
     {
-        path: "/validate",
-        element: (
-          <>
-           <Alert/>
-           <TwoFactor/>
-          </>
-        ),
-    },
-    {
       path: "register/infobase/*",
       element: (
         <>
@@ -131,7 +122,25 @@ function BaseRouter() {
          <RegisterInfo/>
         </>
       ),
+    }*/,
+    {
+      path: "/register",
+      element: (
+        <>
+         <Alert/>
+         <RegisterInfo/>
+        </>
+      ),
     },
+    {
+      path: "/validate",
+      element: (
+        <>
+         <Alert/>
+         <TwoFactor/>
+        </>
+      ),
+  },
     {
       path: "login/forgotpw",
       element: (

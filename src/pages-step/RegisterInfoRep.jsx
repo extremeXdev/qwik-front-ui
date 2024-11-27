@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-// import { Formik } from 'formik';
+
 import { useFormik } from 'formik';
 
 import QwikLogo from '../components/QwikLogo';
@@ -24,34 +24,6 @@ const RegisterInfoRep = ({displayLogo=false, displayStep=false, stepN=1, stepZ=1
  //::::
 
  // - - - - QW - - - -
-/*
- const [reprLegalName, setreprLegalName] = useState('');
- const [reprLegalTitle, setreprLegalTitle] = useState('');
- const [reprRegisteredOfficeAddress, setreprRegisteredOfficeAddress] = useState('');
- const [reprPhoneNumber, setreprPhoneNumber] = useState('');
- const [reprEmail, setReprEmail] = useState('');
- 
-
-  const handlereprLegalNameChange = (event) => {
-    setreprLegalName(event.target.value);
-  };
-
-  const handlereprLegalTitleChange = (event) => {
-    setreprLegalTitle(event.target.value);
-  };
-
-  const handlereprRegisteredOfficeAddressChange = (event) => {
-    setreprRegisteredOfficeAddress(event.target.value);
-  };
-
-  const handlereprPhoneNumberChange = (event) => {
-    setreprPhoneNumber(event.target.value);
-  };
-
-  const handlereprEmailChange = (event) => {
-    setReprEmail(event.target.value);
-  };
-*/
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -65,22 +37,59 @@ const RegisterInfoRep = ({displayLogo=false, displayStep=false, stepN=1, stepZ=1
     // });
   };
 
-  function stepProcess() {
-     
-  }
+
+  const validate_extra = values => {
+    const errors = {};
+  
+    if (!values.reprLegalName) {
+      errors.reprLegalName = 'Name Required';
+    } else if (values.reprLegalName.length < 5) {
+      errors.reprLegalName = 'Name Too short';
+    }
+  
+    if (!values.reprLegalTitle) {
+      errors.reprLegalTitle = 'Legal Title required';
+    } else if (values.reprLegalTitle.length < 5) {
+      errors.reprLegalTitle = 'Legal Title too Short';
+    }
+  
+    if (!values.reprRegisteredOfficeAddress) {
+      errors.reprRegisteredOfficeAddress = 'Office Address required';
+    } else if (values.reprRegisteredOfficeAddress.length < 15) {
+      errors.reprRegisteredOfficeAddress = "Office Address too short";
+    }/*else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.reprEmail)) {
+      errors.reprEmail = 'Invalid reprEmail address';
+    }*/
+
+    if (!values.reprPhoneNumber) {
+      errors.reprPhoneNumber = "Phone Number required";
+    }
+    else if ( !utils.qw_validatePhoneNumber(values.reprPhoneNumber) ) {
+      errors.reprPhoneNumber = "Phone Number incorrect";
+    }
+
+    if (!values.reprEmail) {
+      errors.reprEmail = "Email required";
+    } else if ( !utils.qw_validateEmailFormat(values.reprEmail)) {
+      errors.reprEmail = "Email invalid";
+    }
+  
+    return errors;
+  };
+
 
   const validate = values => {
     const errors = {};
   
     if (!values.reprLegalName) {
       errors.reprLegalName = 'Required';
-    } else if (values.reprLegalName.length < 6) {
+    } else if (values.reprLegalName.length < 5) {
       errors.reprLegalName = 'Too short';
     }
   
     if (!values.reprLegalTitle) {
       errors.reprLegalTitle = 'Required';
-    } else if (values.reprLegalTitle.length < 6) {
+    } else if (values.reprLegalTitle.length < 5) {
       errors.reprLegalTitle = 'Too Short';
     }
   
@@ -118,11 +127,38 @@ const RegisterInfoRep = ({displayLogo=false, displayStep=false, stepN=1, stepZ=1
     },
     validate,
     onSubmit: values => {
-      updateFormData(values, 2);
-      // alert(utils.qw_dataToJsonStringFormat(formData));
-      onClick_Promise();
+     
+      const data = values;
+
+      updateFormData(data, stepN);
+  
+     //:::: continue with right data
+       stepProcess(data);
+     //::::
     },
   });
+
+
+function validatedSignupForm(fieldsData = {}) {
+
+  //:::: validate call
+  const wrongs = validate_extra(fieldsData);
+  //::::
+
+  //:::: check if there is any wrongness
+    return utils.qw_validatedForm(wrongs);
+  //::::
+}
+
+function stepProcess(data) {
+ 
+  if( !validatedSignupForm(data) )
+    { return; }
+
+   //:::: continue with right data
+     onClick_Promise();
+   //::::
+}
 
 
   return (
@@ -141,20 +177,13 @@ const RegisterInfoRep = ({displayLogo=false, displayStep=false, stepN=1, stepZ=1
                 <label htmlFor="reprLegalName">Nom du Representant Legal:</label>
               </div>
               <div className="qwik-form-field">
-
                   <div className="qwik-grouped-field">
                     <input type="text" id="reprLegalName" name="reprLegalName"
-                    // value={reprLegalName}
-                    // onChange={(e) => handlereprLegalNameChange(e)}
-
-                    // onChange={handleChange}
-                    // onBlur={handleBlur}
-                    // value={values.name}
-                    placeholder='Super-Branded Commerce LLC.'
-                    required
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.reprLegalName}
+                     placeholder='Super-Branded Commerce LLC.'
+                     required
+                     onChange={formik.handleChange}
+                     onBlur={formik.handleBlur}
+                     value={formik.values.reprLegalName}
                     />
                     {formik.touched.reprLegalName && formik.errors.reprLegalName ?
                         (<div className="color-emphasize-red">{formik.errors.reprLegalName}</div>) : null}
@@ -169,15 +198,13 @@ const RegisterInfoRep = ({displayLogo=false, displayStep=false, stepN=1, stepZ=1
               </div>
               <div className="qwik-form-field">
                 <div className="qwik-grouped-field">
-                    <input type="text" id="reprLegalTitle" name="reprLegalTitle"
-                    // value={reprLegalTitle}
-                    // onChange={(e) => handlereprLegalTitleChange(e)}
-                    placeholder='Super-Branded'                
-                    required
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.reprLegalTitle}
-                    />
+                   <input type="text" id="reprLegalTitle" name="reprLegalTitle"
+                     placeholder='Super-Branded'                
+                     required
+                     onChange={formik.handleChange}
+                     onBlur={formik.handleBlur}
+                     value={formik.values.reprLegalTitle}
+                   />
                     {formik.touched.reprLegalTitle && formik.errors.reprLegalTitle ?
                         (<div className="color-emphasize-red">{formik.errors.reprLegalTitle}</div>) : null}
                   </div>
@@ -192,13 +219,11 @@ const RegisterInfoRep = ({displayLogo=false, displayStep=false, stepN=1, stepZ=1
               <div className="qwik-form-field">
                 <div className="qwik-grouped-field">
                   <input type="text" id="reprRegisteredOfficeAddress" name="reprRegisteredOfficeAddress"
-                  // value={reprRegisteredOfficeAddress}
-                  // onChange={(e) => handlereprRegisteredOfficeAddressChange(e)}
-                  placeholder='Street Premier, Nashville, HolyLand'
-                  required
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.reprRegisteredOfficeAddress}
+                   placeholder='Street Premier, Nashville, HolyLand'
+                   required
+                   onChange={formik.handleChange}
+                   onBlur={formik.handleBlur}
+                   value={formik.values.reprRegisteredOfficeAddress}
                   />
                   {formik.touched.reprRegisteredOfficeAddress && formik.errors.reprRegisteredOfficeAddress ?
                       (<div className="color-emphasize-red">{formik.errors.reprRegisteredOfficeAddress}</div>) : null}
@@ -213,13 +238,11 @@ const RegisterInfoRep = ({displayLogo=false, displayStep=false, stepN=1, stepZ=1
               <div className="qwik-form-field">
                 <div className="qwik-grouped-field">
                   <input type="tel" id="reprPhoneNumber" name="reprPhoneNumber"
-                  // value={reprPhoneNumber}
-                  // onChange={(e) => handlereprPhoneNumberChange(e)}
-                  placeholder='+44 ***********'
-                  required
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.reprPhoneNumber}
+                   placeholder='+44 ***********'
+                   required
+                   onChange={formik.handleChange}
+                   onBlur={formik.handleBlur}
+                   value={formik.values.reprPhoneNumber}
                   />
                   {formik.touched.reprPhoneNumber && formik.errors.reprPhoneNumber ?
                       (<div className="color-emphasize-red">{formik.errors.reprPhoneNumber}</div>) : null}
@@ -234,14 +257,12 @@ const RegisterInfoRep = ({displayLogo=false, displayStep=false, stepN=1, stepZ=1
               <div className="qwik-form-field">
                 <div className="qwik-grouped-field">
                   <input type="reprEmail" id="reprEmail" name="reprEmail"
-                  // value={reprEmail}
-                  // pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                  // onChange={(e) => handlereprEmailChange(e)}
-                  placeholder='sale@company.com'
-                  //required
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.reprEmail}
+                   // pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                   placeholder='sale@company.com'
+                   //required
+                   onChange={formik.handleChange}
+                   onBlur={formik.handleBlur}
+                   value={formik.values.reprEmail}
                   />
                   {formik.touched.reprEmail && formik.errors.reprEmail ?
                       (<div className="color-emphasize-red">{formik.errors.reprEmail}</div>) : null}
