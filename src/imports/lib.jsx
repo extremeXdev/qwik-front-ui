@@ -532,10 +532,23 @@ export function qw_alertPromise_pro(def_wait, autoclose_delay) {
   )
 }
 
-export function qw_alertPromise_loading(msg, cleanZoneFirst=false) {
+export function qw_alertPromise_loading(msg, cleanZoneFirst=false, pauseOnFocusLoss=false, autoclose_delay=false, autoclose_delay_ms=2000) {
   if(cleanZoneFirst)
     { qw_alertToast_dismissAll(); }
-    const id = toast.loading(msg);
+  
+    const id = toast.loading(msg, {
+      
+      closeOnClick: !autoclose_delay,
+      pauseOnFocusLoss: pauseOnFocusLoss,
+    }
+    );
+
+    // Simulate a delay (e.g., 3 seconds) before removing the toast setTimeout(() => { toast.remove(toastId); }, 3000);
+    //const resolveAfter3Sec = new Promise(resolve => setTimeout(resolve, msg));
+
+    // Simulate a delay (e.g., 3 seconds) before removing the toast
+      qw_alertToast_dismiss(id, autoclose_delay_ms);
+
   return id;
 }
 
@@ -594,12 +607,35 @@ const response = await toast.promise(
   );
 };
 
-export function qw_alertToast_dismiss(toast_id) {
-   toast.dismiss(toast_id);
+export function qw_alertToast_dismiss(toast_id, autoclose_delay_ms=100000) {
+  // Simulate a delay (e.g., 3 seconds) before removing the toast
+  qw_delayedPromise(toast.dismiss, toast_id, autoclose_delay_ms);
 }
 
-export function qw_alertToast_dismissAll() {
-  toast.dismiss();
+export function qw_alertToast_dismissAll(autoclose_delay_ms=100000) {
+  // Simulate a delay (e.g., 3 seconds) before removing the toast
+  qw_delayedPromise_(toast.dismiss, autoclose_delay_ms);
+}
+
+
+export function qw_delayedPromise_(Promise, delay_ms=100000) {
+  // Simulate a delay (e.g., 3 seconds) before removing the toast
+   setTimeout(() => { Promise(); }, delay_ms);
+}
+
+export function qw_delayedPromise(Promise, params, delay_ms=100000) {
+  // Simulate a delay (e.g., 3 seconds) before removing the toast
+   setTimeout(() => { Promise(params); }, delay_ms);
+}
+
+export function qw_delayedPromiseSeries3(Promise, params, beforePromise, params_bef, afterPromise, params_aft, delay_ms=100000, afterPromise_delay_ms=0) {
+  beforePromise(params_bef);
+  
+  qw_delayedPromise(Promise, params, delay_ms);
+
+  qw_pause(afterPromise_delay_ms);
+
+  afterPromise(params_aft);
 }
 
 export function qw_alert_(msg, notifTyp=NotifType.Warning) {
